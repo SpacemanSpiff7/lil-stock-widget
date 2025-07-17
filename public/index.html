@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Ticker Analyzer</title>
+    
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Plotly.js for charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
+    
+    <style>
+      /* Custom CSS Variables for theming */
+      :root {
+        --primary-color: #3b82f6;
+        --secondary-color: #1f2937;
+        --success-color: #10b981;
+        --danger-color: #ef4444;
+        --warning-color: #f59e0b;
+        --info-color: #3b82f6;
+      }
+      
+      /* Loading animation */
+      .loading-spinner {
+        border: 3px solid #f3f4f6;
+        border-top: 3px solid var(--primary-color);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      
+      /* Dark mode scrollbar */
+      .dark ::-webkit-scrollbar-track {
+        background: #1e293b;
+      }
+      
+      .dark ::-webkit-scrollbar-thumb {
+        background: #475569;
+      }
+      
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- Main widget container -->
+    <div id="root"></div>
+    
+    <!-- Embedding instructions (hidden by default) -->
+    <div id="embed-instructions" style="display: none;">
+      <h3>How to Embed This Widget</h3>
+      <p>Add this HTML to your website:</p>
+      <pre><code>&lt;script src="finance-widget.js"&gt;&lt;/script&gt;
+&lt;div id="finance-widget-root"&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Optional: Initialize with custom container
+  FinanceWidget.init('your-custom-container-id');
+&lt;/script&gt;</code></pre>
+    </div>
+    
+    <!-- Fallback message for unsupported browsers -->
+    <div id="unsupported-browser" style="display: none;">
+      <div style="text-align: center; padding: 40px; font-family: Arial, sans-serif;">
+        <h2>Browser Not Supported</h2>
+        <p>This widget requires a modern browser with JavaScript enabled.</p>
+        <p>Please update your browser or enable JavaScript to continue.</p>
+      </div>
+    </div>
+    
+    <script>
+      // Check for browser compatibility
+      if (!window.Worker || !window.fetch || !window.Promise) {
+        document.getElementById('finance-widget-root').style.display = 'none';
+        document.getElementById('unsupported-browser').style.display = 'block';
+      }
+      
+      // Error handling for unhandled promise rejections
+      window.addEventListener('unhandledrejection', function(event) {
+        console.error('Unhandled promise rejection:', event.reason);
+        // Could show user-friendly error message here
+      });
+      
+      // Performance monitoring (optional)
+      if ('performance' in window) {
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            if (perfData && perfData.loadEventEnd) {
+              console.log('Widget load time:', perfData.loadEventEnd - perfData.navigationStart, 'ms');
+            }
+          }, 0);
+        });
+      }
+    </script>
+  </body>
+</html>
+
