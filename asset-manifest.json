@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/lil-stock-widget/static/css/main.adb45054.css",
-    "main.js": "/lil-stock-widget/static/js/main.134563c1.js",
+    "main.css": "/lil-stock-widget/static/css/main.2120f22b.css",
+    "main.js": "/lil-stock-widget/static/js/main.15c93141.js",
     "index.html": "/lil-stock-widget/index.html",
-    "main.adb45054.css.map": "/lil-stock-widget/static/css/main.adb45054.css.map",
-    "main.134563c1.js.map": "/lil-stock-widget/static/js/main.134563c1.js.map"
+    "main.2120f22b.css.map": "/lil-stock-widget/static/css/main.2120f22b.css.map",
+    "main.15c93141.js.map": "/lil-stock-widget/static/js/main.15c93141.js.map"
   },
   "entrypoints": [
-    "static/css/main.adb45054.css",
-    "static/js/main.134563c1.js"
+    "static/css/main.2120f22b.css",
+    "static/js/main.15c93141.js"
   ]
 }
