@@ -249,6 +249,23 @@ p {
   transform: none;
 }
 
+/* Help Button */
+.help-button {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.help-button:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
 /* Settings Button */
 .settings-button {
   background: var(--bg-secondary);

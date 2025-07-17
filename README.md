@@ -147,7 +147,19 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 If you have questions or need help:
 - Check the educational resources above
 - Review the tooltips within the application
+- Use the Help & FAQ section (question mark icon) in the app
 - Open an issue on GitHub
+
+## 🐛 Bug Reports & Feedback
+
+The app includes a Help & FAQ section (accessible via the question mark icon) that provides:
+
+- **API Setup Guide** - Step-by-step instructions for getting started
+- **Analysis Explanations** - Detailed explanations of all metrics and indicators
+- **FAQ Section** - Common questions and answers
+- **GitHub Issues** - Direct links to report bugs or request features
+
+To report issues or suggest improvements, simply click the question mark icon in the app and use the "Create GitHub Issue" button.
 
 ---
 

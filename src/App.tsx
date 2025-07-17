@@ -19,6 +19,7 @@ function App() {
   const [ticker, setTicker] = useState('AAPL');
   const [activeTab, setActiveTab] = useState('historical');
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [selectedTimeline, setSelectedTimeline] = useState('1y');
   const [apiWarning, setApiWarning] = useState<string | null>(null);
@@ -392,10 +393,22 @@ function App() {
                 </button>
               </form>
 
+              {/* Help Button */}
+              <button
+                onClick={() => setHelpOpen(true)}
+                className="help-button"
+                title="Help & FAQ"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </button>
+
               {/* Settings Button */}
               <button
                 onClick={() => setSettingsOpen(true)}
                 className="settings-button"
+                title="Settings"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -1201,6 +1214,209 @@ function App() {
                   className="w-full px-6 py-3 bg-accent-primary text-white font-medium rounded-xl hover:bg-accent-secondary transition-all duration-200 shadow-lg"
                 >
                   Done
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Help Drawer */}
+      {helpOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+            onClick={() => setHelpOpen(false)}
+          />
+          
+          {/* Drawer */}
+          <div className="absolute right-0 top-0 h-full w-full max-w-2xl bg-elevated border-l border-light shadow-2xl">
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="flex items-center justify-between p-6 border-b border-light">
+                <h2 className="text-xl font-semibold text-primary">Help & FAQ</h2>
+                <button
+                  onClick={() => setHelpOpen(false)}
+                  className="p-2 text-secondary hover:text-primary rounded-full hover:bg-secondary transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-8">
+                {/* API Setup Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    API Setup Guide
+                  </h3>
+                  <div className="bg-secondary rounded-xl p-4 space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-primary mb-2">1. Get Your API Keys</h4>
+                      <div className="space-y-2">
+                        <p className="text-sm text-secondary">
+                          <strong>Alpha Vantage:</strong> Visit <a href="https://www.alphavantage.co" target="_blank" rel="noopener noreferrer" className="text-accent-primary hover:underline">alphavantage.co</a> and sign up for a free API key
+                        </p>
+                        <p className="text-sm text-secondary">
+                          <strong>Polygon:</strong> Visit <a href="https://polygon.io" target="_blank" rel="noopener noreferrer" className="text-accent-primary hover:underline">polygon.io</a> and create a free account
+                        </p>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-primary mb-2">2. Add Your Keys</h4>
+                      <p className="text-sm text-secondary">
+                        Click the settings icon (⚙️) in the top right, then paste your API keys in the designated fields. Your keys are stored locally and never sent to our servers.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-primary mb-2">3. Start Analyzing</h4>
+                      <p className="text-sm text-secondary">
+                        Enter any stock ticker symbol (e.g., AAPL, MSFT, TSLA) and click "Analyze" to begin your comprehensive financial analysis.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Analysis Explanations */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Understanding Your Analysis
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="bg-secondary rounded-xl p-4">
+                      <h4 className="font-semibold text-primary mb-2">Technical Indicators</h4>
+                      <div className="space-y-2 text-sm text-secondary">
+                        <p><strong>RSI (Relative Strength Index):</strong> Measures momentum on a scale of 0 to 100. Above 70 = overbought, below 30 = oversold.</p>
+                        <p><strong>MACD:</strong> Shows relationship between two moving averages. Signal line crossovers indicate potential buy/sell opportunities.</p>
+                        <p><strong>Bollinger Bands:</strong> Shows price volatility. Prices near the bands suggest potential reversals.</p>
+                        <p><strong>Moving Averages:</strong> Smooth price data to identify trends. Golden cross (50-day above 200-day) = bullish signal.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-secondary rounded-xl p-4">
+                      <h4 className="font-semibold text-primary mb-2">Monte Carlo Simulation</h4>
+                      <div className="space-y-2 text-sm text-secondary">
+                        <p><strong>What it does:</strong> Simulates thousands of possible future price paths using advanced mathematical models.</p>
+                        <p><strong>GARCH Model:</strong> Accounts for volatility clustering (periods of high/low volatility tend to persist).</p>
+                        <p><strong>Regime Detection:</strong> Identifies bull/bear market phases and adjusts predictions accordingly.</p>
+                        <p><strong>Risk Metrics:</strong> Calculates Value at Risk (VaR) and probability of different outcomes.</p>
+                      </div>
+                    </div>
+
+                    <div className="bg-secondary rounded-xl p-4">
+                      <h4 className="font-semibold text-primary mb-2">Valuation Metrics</h4>
+                      <div className="space-y-2 text-sm text-secondary">
+                        <p><strong>P/E Ratio:</strong> Price-to-earnings ratio. Lower values may indicate undervaluation.</p>
+                        <p><strong>P/B Ratio:</strong> Price-to-book ratio. Compares market value to book value.</p>
+                        <p><strong>PEG Ratio:</strong> P/E ratio divided by growth rate. Below 1.0 suggests undervaluation.</p>
+                        <p><strong>Dividend Yield:</strong> Annual dividend as percentage of current price.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* FAQ Section */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Frequently Asked Questions
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="bg-secondary rounded-xl p-4">
+                      <h4 className="font-semibold text-primary mb-2">Why do I need API keys?</h4>
+                      <p className="text-sm text-secondary">
+                        API keys allow you to access real-time financial data from professional data providers. Free tiers are available from both Alpha Vantage and Polygon.
+                      </p>
+                    </div>
+                    
+                    <div className="bg-secondary rounded-xl p-4">
+                      <h4 className="font-semibold text-primary mb-2">How accurate are the predictions?</h4>
+                      <p className="text-sm text-secondary">
+                        This tool provides probabilistic forecasts based on historical patterns. Past performance doesn't guarantee future results. Always do your own research and consider consulting a financial advisor.
+                      </p>
+                    </div>
+                    
+                    <div className="bg-secondary rounded-xl p-4">
+                      <h4 className="font-semibold text-primary mb-2">What does "regime detection" mean?</h4>
+                      <p className="text-sm text-secondary">
+                        Markets switch between bull (rising) and bear (falling) phases. Our model detects these regimes and adjusts predictions accordingly for more accurate forecasts.
+                      </p>
+                    </div>
+                    
+                    <div className="bg-secondary rounded-xl p-4">
+                      <h4 className="font-semibold text-primary mb-2">How do I interpret the buy/sell signals?</h4>
+                      <p className="text-sm text-secondary">
+                        Signals are based on multiple technical indicators and fundamental analysis. Green signals suggest bullish conditions, red signals suggest bearish conditions. Use as one tool in your decision-making process.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact Form */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                    Report a Bug
+                  </h3>
+                  <div className="bg-secondary rounded-xl p-4 space-y-4">
+                    <p className="text-sm text-secondary">
+                      Found a bug or have a suggestion? Create an issue on our GitHub repository.
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <div className="bg-primary rounded-lg p-4 border border-light">
+                        <h4 className="font-semibold text-primary mb-2">Before reporting:</h4>
+                        <ul className="text-sm text-secondary space-y-1">
+                          <li>• Check if the issue is already reported</li>
+                          <li>• Include steps to reproduce the problem</li>
+                          <li>• Add screenshots if relevant</li>
+                          <li>• Mention your browser and operating system</li>
+                        </ul>
+                      </div>
+                      
+                      <div className="flex gap-3">
+                        <a
+                          href="https://github.com/SpacemanSpiff7/lil-stock-widget/issues/new"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 px-6 py-3 bg-accent-primary text-white font-medium rounded-xl hover:bg-accent-secondary transition-all duration-200 shadow-lg text-center"
+                        >
+                          Create GitHub Issue
+                        </a>
+                        <a
+                          href="https://github.com/SpacemanSpiff7/lil-stock-widget/issues"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 px-6 py-3 bg-secondary text-primary font-medium rounded-xl hover:bg-tertiary transition-all duration-200 border border-light text-center"
+                        >
+                          View All Issues
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-light">
+                <button
+                  onClick={() => setHelpOpen(false)}
+                  className="w-full px-6 py-3 bg-accent-primary text-white font-medium rounded-xl hover:bg-accent-secondary transition-all duration-200 shadow-lg"
+                >
+                  Close
                 </button>
               </div>
             </div>
