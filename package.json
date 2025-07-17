@@ -2,7 +2,7 @@
   "name": "finance-analytics-widget",
   "version": "1.0.0",
   "description": "Advanced financial analytics widget with Monte Carlo simulation",
-  "homepage": ".",
+  "homepage": "https://spacemanspiff7.github.io/lil-stock-widget",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
